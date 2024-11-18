@@ -1,12 +1,17 @@
 import React from 'react';
-import SportsLocations from './components/sportsLocations.js';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SearchBar from './components/search_bar/SearchBar';
+import SportsLocations from './components/sportsLocations';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <SportsLocations />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<SearchBar />} />
+        <Route path="/sports-locations" element={<SportsLocations />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;

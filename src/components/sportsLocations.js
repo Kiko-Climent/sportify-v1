@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLocations, setLoading } from '../redux/slices/sportsLocationsSlice';
-import Map from '../components/maps/Map.js';
 
 const SportsLocations = () => {
   const dispatch = useDispatch();
-  const locations = useSelector((state) => state.sportsLocations.locations);
+  const locations = useSelector((state) => state.sportsLocations.locations); // Todos los datos
+  const filteredLocations = useSelector((state) => state.sportsLocations.filteredLocations); // Datos filtrados
   const loading = useSelector((state) => state.sportsLocations.loading);
 
   useEffect(() => {
-    dispatch(setLoading(true)); // Iniciamos el estado de carga
+    dispatch(setLoading(true));
 
     fetch(
       'https://firestore.googleapis.com/v1/projects/sportify-v1/databases/(default)/documents/sports_locations'
@@ -21,33 +21,31 @@ const SportsLocations = () => {
         return response.json();
       })
       .then((data) => {
-        console.log('Fetched data:', data); // Verifica la estructura de los datos
-        dispatch(setLocations(data.documents || [])); // Almacenamos los datos en Redux
-        dispatch(setLoading(false)); // Finalizamos el estado de carga
+        dispatch(setLocations(data.documents || [])); // Almacenar todos los datos
+        dispatch(setLoading(false));
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
-        dispatch(setLoading(false)); // Finalizamos el estado de carga si hay error
+        dispatch(setLoading(false));
       });
   }, [dispatch]);
+
+  const results = filteredLocations.length > 0 ? filteredLocations : locations;
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (!locations || locations.length === 0) {
-    return <div>No locations found</div>; // Manejo cuando no hay datos
+  if (!results || results.length === 0) {
+    return <div>No locations found</div>;
   }
 
   return (
     <div>
       <h1>Sports Locations</h1>
       <ul>
-        {locations.map((location, index) => {
+        {results.map((location, index) => {
           const fields = location.fields || {};
-          const latitude = fields.location?.geoPointValue?.latitude;
-          const longitude = fields.location?.geoPointValue?.longitude;
-
           return (
             <li key={index}>
               <h2>{fields.name?.stringValue || 'Name not available'}</h2>
@@ -61,9 +59,6 @@ const SportsLocations = () => {
                       .join(', ')
                   : 'No sports available'}
               </p>
-              {latitude && longitude && (
-                <Map latitude={latitude} longitude={longitude} />
-              )}
             </li>
           );
         })}
