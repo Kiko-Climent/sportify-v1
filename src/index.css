@@ -8,7 +8,48 @@
   }
 }
 
+/* Importar PPPangramSans-CondensedBold */
+@font-face {
+  font-family: 'PPPangramSans';
+  src: url('/public/fonts/PPPangramSans-CondensedBold.eot') format('embedded-opentype'),
+       url('/public/fonts/PPPangramSans-CondensedBold.woff') format('woff'),
+       url('/public/fonts/PPPangramSans-CondensedBold.ttf') format('truetype'),
+       url('/public/fonts/PPPangramSans-CondensedBold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Importar PPPangramSans-CondensedThin */
+@font-face {
+  font-family: 'PPPangramSans';
+  src: url('/public/fonts/PPPangramSans-CondensedThin.woff2') format('woff2'),
+       url('/public/fonts/PPPangramSans-CondensedThin.woff') format('woff'),
+       url('/public/fonts/PPPangramSans-CondensedThin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+/* Usar la variante bold para títulos */
+h1, h2, h3 {
+  font-family: 'PPPangramSans', sans-serif;
+  font-weight: bold; /* Esto usa CondensedBold */
+}
+
+/* Usar la variante thin para subtítulos o texto ligero */
+h4, h5, h6 {
+  font-family: 'PPPangramSans', sans-serif;
+  font-weight: 100; /* Esto usa CondensedThin */
+}
+
+/* Usar una fuente predeterminada para el resto */
+body, p {
+  font-family: 'PPPangramSans', sans-serif;
+  font-weight: normal; /* Puedes usar un peso intermedio si es necesario */
+}
+
+
 body {
+  
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -21,3 +62,5 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
