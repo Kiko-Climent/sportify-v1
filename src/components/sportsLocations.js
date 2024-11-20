@@ -14,12 +14,12 @@ const SportsLocations = () => {
   }
 
   return (
-    <section className='flex justify-center pt-48'>
-      <div className='flex'>
-        <h1>Sports Locations:</h1>
+    <section className='flex flex-col items-center justify-center text-highlight h-screen'>
+      <div className='uppercase flex text-2xl'>
+        <h1 className='text-3xl'>|| locations ||</h1>
       </div>
-      <div className='flex'>
-        <ul>
+      <div className='flex text-lg'>
+        <ul className='font-semibold'>
           {filteredLocations.map((location, index) => {
             const fields = location.fields || {};
             return (
@@ -27,14 +27,14 @@ const SportsLocations = () => {
                 <h2>{fields.name?.stringValue || 'Name not available'}</h2>
                 <p>{fields.address?.stringValue || 'Address not available'}</p>
                 <p>{fields.details?.stringValue || 'Details not available'}</p>
-                <p>
+                <h2 className='text-xl'>
                   Sports:{' '}
                   {fields.sport?.arrayValue?.values
                     ? fields.sport.arrayValue.values
                         .map((val) => val.stringValue)
                         .join(', ')
                     : 'No sports available'}
-                </p>
+                </h2>
               </li>
             );
           })}

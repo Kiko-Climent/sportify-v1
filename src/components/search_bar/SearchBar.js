@@ -20,20 +20,20 @@ const SearchBar = () => {
   };
 
   return (
-    <section className="!font-black skew-y-6 flex flex-col items-center justify-center gap-7 uppercase blur-[0.5px] w-full h-screen">
+    <section className="!font-black skew-y-6 flex flex-col items-center justify-center gap-7 uppercase blur-[0.5px] w-full h-screen ">
       <div className="flex">
-        <h1 className="text-8xl scale-y-150 w-full text-[#cbf789]">What do you want to play today?</h1>
+        <h1 className="text-8xl scale-y-150 w-full text-highlight ">What do you want to play today?</h1>
       </div>
-      <div className="flex text-8xl scale-y-150 border-2 border-[#cbf789] w-full">
+      <div className="flex text-8xl scale-y-150 border-2 border-highlight w-full ">
         <input
-          className="text-center border-2 border-[#cbf789] text-[#cbf789] focus:outline-none focus:ring-0 placeholder-[#cbf789] bg-transparent focus:placeholder-transparent"
+          className="text-center border-2 border-highlight text-highlight focus:outline-none focus:ring-0 placeholder-highlight bg-transparent focus:placeholder-transparent"
           type="text"
-          placeholder="Type your sport here"
+          placeholder="type your sport here"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <button
-          className="bg-[#cbf789] text-[#1c1c1c] px-4 py-2 border-none w-full"
+          className="bg-highlight text-[#1c1c1c] px-4 py-2 border-none w-full"
           onClick={handleSearch}
         >
           PLAY
