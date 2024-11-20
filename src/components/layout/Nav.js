@@ -42,7 +42,7 @@ const Nav = () => {
   }, []);
 
   return (
-    <nav className="fixed w-full px-3 flex justify-between text-[#cbf789] tracking-wider blur-[0.5px]">
+    <nav className="uppercase px-3 fixed w-full flex justify-between text-[#cbf789] tracking-wider blur-[0.5px] w-screen overflow-hidden">
       <h1 className="text-3xl py-2 scale-y-150">sportify</h1>
       <div className="flex-col text-xs leading-3 align-top font-bold py-3 scale-y-150">
         <ul>

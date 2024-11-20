@@ -20,11 +20,11 @@ const SearchBar = () => {
   };
 
   return (
-    <section className="!font-black skew-y-6 flex flex-col items-center justify-center gap-7 uppercase blur-[0.5px] w-full h-screen ">
-      <div className="flex">
+    <section className="!font-black flex flex-col items-center justify-center gap-7 uppercase blur-[0.5px] w-full h-screen overflow-hidden">
+      <div className="flex skew-y-3">
         <h1 className="text-8xl scale-y-150 w-full text-highlight ">What do you want to play today?</h1>
       </div>
-      <div className="flex text-8xl scale-y-150 border-2 border-highlight w-full ">
+      <div className="flex text-8xl scale-y-150 border-2 border-highlight w-full skew-y-3 ">
         <input
           className="text-center border-2 border-highlight text-highlight focus:outline-none focus:ring-0 placeholder-highlight bg-transparent focus:placeholder-transparent"
           type="text"

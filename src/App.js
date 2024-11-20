@@ -5,6 +5,7 @@ import { setLocations, setLoading } from './redux/slices/sportsLocationsSlice';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import Results from './pages/Results';
+// import SplashScreen from './components/SplashScreen';
 
 const App = () => {
   const dispatch = useDispatch();
