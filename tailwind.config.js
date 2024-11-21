@@ -14,3 +14,5 @@ module.exports = {
   plugins: [],
 }
 
+// highlight: #2a46f6 , #cbf789
+// bg_color: #e3e3e3 , #1c1c1c

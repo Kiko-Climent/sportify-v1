@@ -33,7 +33,7 @@ const SearchBar = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <button
-          className="bg-highlight text-[#1c1c1c] px-4 py-2 border-none w-full"
+          className="bg-highlight text-bg_color px-4 py-2 border-none w-full"
           onClick={handleSearch}
         >
           PLAY
