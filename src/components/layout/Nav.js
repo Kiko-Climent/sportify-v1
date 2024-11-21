@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setUserLocation } from "../../redux/slices/userLocationSlice";
 
 const Nav = () => {
+  const dispatch = useDispatch();
   const [dateInfo, setDateInfo] = useState({ day: "", date: "" });
   const [weatherInfo, setWeatherInfo] = useState({ location: "", temp: "" });
 
@@ -16,6 +19,8 @@ const Nav = () => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
+        dispatch(setUserLocation({ latitude, longitude }));
+
         const apiKey = process.env.REACT_APP_OPENWEATHER_API_KEY;
         const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
 
@@ -39,7 +44,7 @@ const Nav = () => {
       (error) => console.error("Error getting location:", error),
       { enableHighAccuracy: true }
     );
-  }, []);
+  }, [dispatch]);
 
   return (
     <nav className="uppercase px-3 fixed z-10 bg-bg_color w-full flex justify-between text-highlight tracking-wider blur-[0.5px] w-full overflow-hidden">

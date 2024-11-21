@@ -5,13 +5,13 @@ import { setLocations, setLoading } from './redux/slices/sportsLocationsSlice';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import Results from './pages/Results';
-// import SplashScreen from './components/SplashScreen';
+import SplashScreen from './components/SplashScreen';
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setLoading(true)); // Comenzar el estado de carga
+    dispatch(setLoading(true));
 
     fetch(
       'https://firestore.googleapis.com/v1/projects/sportify-v1/databases/(default)/documents/sports_locations'
@@ -23,23 +23,31 @@ const App = () => {
         return response.json();
       })
       .then((data) => {
-        dispatch(setLocations(data.documents || [])); // Guardar los datos en Redux
-        dispatch(setLoading(false)); // Finalizar el estado de carga
+        dispatch(setLocations(data.documents || []));
+        dispatch(setLoading(false));
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
-        dispatch(setLoading(false)); // Manejar errores
+        dispatch(setLoading(false));
       });
   }, [dispatch]);
 
   return (
     <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/sports-locations" element={<Results />} />
-        </Routes>
-      </Layout>
+      <Routes>
+        <Route path="/" element={<SplashScreen />} />
+        <Route
+          path="/*"
+          element={
+            <Layout>
+              <Routes>
+                <Route path="/home" element={<Home />} />
+                <Route path="/sports-locations" element={<Results />} />
+              </Routes>
+            </Layout>
+          }
+        />
+      </Routes>
     </Router>
   );
 };

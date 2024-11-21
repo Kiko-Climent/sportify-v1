@@ -63,9 +63,9 @@ const Map = ({ latitude, longitude }) => {
           { weight: "0.20" },
         ],
       },
-      // Agrega aquí el resto de los estilos...
+      
     ],
-    disableDefaultUI: true, // Opcional: desactiva los controles por defecto
+    disableDefaultUI: true, // 
   };
 
   const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
@@ -74,6 +74,7 @@ const Map = ({ latitude, longitude }) => {
     console.error("Google Maps API Key is missing!");
     return <div>Error: Google Maps API Key not found</div>;
   }
+  
 
   return (
     <LoadScript googleMapsApiKey={googleMapsApiKey}>

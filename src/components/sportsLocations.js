@@ -1,10 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Map from './maps/Map'
+import { haversineDistance } from '../features/Distance';
+import Map from './maps/Map';
 
 const SportsLocations = () => {
   const filteredLocations = useSelector((state) => state.sportsLocations.filteredLocations); // Filtered Data
   const loading = useSelector((state) => state.sportsLocations.loading);
+  const userLocation = useSelector((state) => state.userLocation.userLocation);  // get user location
 
   if (loading) {
     return <div>Loading...</div>;
@@ -16,24 +18,24 @@ const SportsLocations = () => {
 
   return (
     <section className="flex flex-col items-center justify-center text-highlight overflow-hidden h-full pt-24">
-      {/* Título centrado */}
       <div className="text-center mb-6">
         <h1 className="text-3xl uppercase font-bold">Locations Found:</h1>
       </div>
       
-      {/* Contenedor principal para información y mapa */}
       <div className="w-full flex flex-col text-center lg:text-start">
         {filteredLocations.map((location, index) => {
           const fields = location.fields || {};
           const latitude = fields.location?.geoPointValue?.latitude;
           const longitude = fields.location?.geoPointValue?.longitude;
 
+          // Calculate distance between user and location
+          const distance = userLocation.latitude && userLocation.longitude && latitude && longitude 
+            ? haversineDistance(userLocation, { latitude, longitude }) 
+            : null;
+
           return (
-            <div
-              key={index}
-              className="flex flex-col lg:flex-row gap-6 lg:gap-8 p-3"
-            >
-              {/* Columna de información */}
+            <div key={index} className="flex flex-col lg:flex-row gap-6 lg:gap-8 p-3">
+              
               <div className="flex-1">
                 <h2 className="font-bold text-2xl">
                   {fields.name?.stringValue || "Name not available"}
@@ -48,9 +50,13 @@ const SportsLocations = () => {
                         .join(", ")
                     : "No sports available"}
                 </h2>
+
+                
+                {distance !== null && (
+                  <p className="mt-2 text-sm font-semibold">Distance: {distance.toFixed(2)} km</p>
+                )}
               </div>
 
-              {/* Columna del mapa */}
               <div className="flex-1">
                 {latitude && longitude ? (
                   <div className="">
@@ -65,7 +71,6 @@ const SportsLocations = () => {
         })}
       </div>
     </section>
-
   );
 };
 
