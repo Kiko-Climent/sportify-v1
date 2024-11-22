@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUserLocation } from "../../redux/slices/userLocationSlice";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   const dispatch = useDispatch();
@@ -48,7 +49,9 @@ const Nav = () => {
 
   return (
     <nav className="uppercase px-3 fixed z-10 bg-bg_color w-full flex justify-between text-highlight tracking-wider blur-[0.5px] w-full overflow-hidden">
-      <h1 className="text-3xl py-2 scale-y-150">sportify</h1>
+      <h1 className="text-3xl py-2 scale-y-150">
+        <Link to='/home' className="hover:blur-[2px]">sportify</Link>
+      </h1>
       <div className="flex-col text-xs leading-3 align-top font-bold py-3 scale-y-150">
         <ul>
           <li>{dateInfo.day}, {dateInfo.date}</li>

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { LoadScript } from "@react-google-maps/api";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setLocations, setLoading } from './redux/slices/sportsLocationsSlice';
@@ -6,6 +7,8 @@ import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import Results from './pages/Results';
 import SplashScreen from './components/SplashScreen';
+
+const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 const App = () => {
   const dispatch = useDispatch();
@@ -34,12 +37,13 @@ const App = () => {
 
   return (
     <Router>
+      <LoadScript googleMapsApiKey={googleMapsApiKey}>
       <Routes>
         <Route path="/" element={<SplashScreen />} />
         <Route
           path="/*"
           element={
-            <Layout>
+            <Layout>            
               <Routes>
                 <Route path="/home" element={<Home />} />
                 <Route path="/sports-locations" element={<Results />} />
@@ -48,6 +52,7 @@ const App = () => {
           }
         />
       </Routes>
+      </LoadScript>
     </Router>
   );
 };
