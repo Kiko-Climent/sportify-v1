@@ -5,7 +5,9 @@ import {
 } from "../redux/slices/sportsGoogleSlice";
 
 export const fetchGooglePlaces = (query, location, radius = 5000) => async (dispatch) => {
-  const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&location=${location.latitude},${location.longitude}&radius=${radius}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`;
+  // const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&location=${location.latitude},${location.longitude}&radius=${radius}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`;
+  const proxyUrl = process.env.REACT_APP_PROXY_URL;
+  const url = `${proxyUrl}?query=${query}&location=${location.latitude},${location.longitude}&radius=${radius}`;
   console.log('Calling API URL:', url);
 
   dispatch(fetchGoogleLocationsStart());

@@ -1,7 +1,10 @@
 export default async function handler(req, res) {
   const {query, location, radius} = req.query;
+  console.log("Proxy Query Params:", { query, location, radius });
 
-  const apiUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&location=${location}&radius=${radius}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`;
+
+  const apiUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&location=${location.latitude},${location.longitude}&radius=${radius}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`;
+
 
   try {
     const response = await fetch(apiUrl);
