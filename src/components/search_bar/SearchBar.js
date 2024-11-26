@@ -1,22 +1,44 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchGooglePlaces } from '../../features/googlePlaces';
 import { setFilteredLocations } from '../../redux/slices/sportsLocationsSlice';
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const locations = useSelector((state) => state.sportsLocations.locations); // Acceso a todos los datos
+  const locations = useSelector((state) => state.sportsLocations.locations); // Access all data
+  const userLocation = useSelector((state) => state.userLocation.userLocation);
 
   const handleSearch = () => {
+    if (!userLocation || !userLocation.latitude || !userLocation.longitude) {
+      alert('Unable to detect your location. Please try again!');
+      return;
+    }
+
+    if (!searchTerm) {
+      alert('Please enter a sport to search!');
+      return;
+    }
+
+    // Llama al thunk para buscar en Google Places
+    dispatch(fetchGooglePlaces(searchTerm, userLocation))
+      .then(() => {
+        navigate('/sports-locations'); // Redirige a los resultados después de la búsqueda
+      })
+      .catch((error) => {
+        console.error('Error fetching Google Places:', error);
+        alert('Something went wrong with the search. Please try again!');
+      });
+
     if (!locations || locations.length === 0) {
       alert('Data is still loading. Please wait!');
       return;
     }
 
-    dispatch(setFilteredLocations(searchTerm)); // Filtrar en Redux
-    navigate('/sports-locations'); // Redirigir a la página de resultados
+    dispatch(setFilteredLocations(searchTerm)); // Filtre Redux
+    navigate('/sports-locations'); // Redirect to results
   };
 
   return (
