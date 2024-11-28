@@ -13,7 +13,7 @@ app.use(express.json());
 
 // Ruta base
 app.get("/", (req, res) => {
-  res.send("Servidor funcionando. Usa /api/google-places para interactuar.");
+  res.send("Server Running succesfully.");
 });
 
 // Ruta para manejar solicitudes a Google Places
@@ -43,7 +43,7 @@ app.get("/api/google-places", async (req, res) => {
 
 // Manejo de rutas no definidas
 app.use((req, res) => {
-  res.status(404).send("Ruta no encontrada. Verifica la documentación del servidor.");
+  res.status(404).send("Route not found");
 });
 
 // Servidor escuchando en el puerto definido

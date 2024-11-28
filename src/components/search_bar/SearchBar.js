@@ -22,10 +22,10 @@ const SearchBar = () => {
       return;
     }
 
-    // Llama al thunk para buscar en Google Places
+    // thunk to search in Google Places
     dispatch(fetchGooglePlaces(searchTerm, userLocation))
       .then(() => {
-        navigate('/sports-locations'); // Redirige a los resultados después de la búsqueda
+        navigate('/sports-locations'); // Redirect to results
       })
       .catch((error) => {
         console.error('Error fetching Google Places:', error);
