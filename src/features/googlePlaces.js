@@ -5,8 +5,8 @@ import {
 } from "../redux/slices/sportsGoogleSlice";
 
 export const fetchGooglePlaces = (query, location, radius = 5000) => async (dispatch) => {
-  const backendUrl = "http://localhost:5000/api/google-places";
-  // const backendUrl = process.env.REACT_APP_PROXY_URL || "http://localhost:5000/api/google-places";
+  // const backendUrl = "http://localhost:5000/api/google-places";
+  const backendUrl = process.env.REACT_APP_PROXY_URL
 
 
   dispatch(fetchGoogleLocationsStart());
