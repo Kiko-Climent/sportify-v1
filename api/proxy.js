@@ -6,10 +6,9 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Missing required parameters" });
   }
 
-  const apiUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&location=${latitude},${longitude}&radius=${radius || 5000}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`;
+  const apiUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&location=${latitude},${longitude}&radius=${radius || 5000}&key=${process.env.GOOGLE_MAPS_API_KEY}`;
 
   try {
-    
     const response = await fetch(apiUrl);
     const data = await response.json();
 
