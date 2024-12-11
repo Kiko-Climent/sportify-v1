@@ -1,12 +1,15 @@
-// api/proxy.js
 export default async function handler(req, res) {
   const { query, latitude, longitude, radius } = req.query;
+
+  console.log("Query Params:", { query, latitude, longitude, radius });
 
   if (!query || !latitude || !longitude) {
     return res.status(400).json({ error: "Missing required parameters" });
   }
 
   const apiUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&location=${latitude},${longitude}&radius=${radius || 5000}&key=${process.env.GOOGLE_MAPS_API_KEY}`;
+
+  console.log("Google API URL:", apiUrl);
 
   try {
     const response = await fetch(apiUrl);
@@ -15,7 +18,8 @@ export default async function handler(req, res) {
     if (data.status === "OK") {
       res.status(200).json(data.results);
     } else {
-      res.status(400).json({ error: data.status });
+      console.error("Google Places Error:", data.error_message || data.status);
+      res.status(400).json({ error: data.error_message || data.status });
     }
   } catch (error) {
     console.error("Error fetching Google Places:", error.message);
